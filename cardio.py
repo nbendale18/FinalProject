@@ -60,22 +60,21 @@ def main():
 
     st.title("Cardiovascular Disease Predictor")
 
-    menu = ["Home","Login","SignUp","Admin Login"]
+    menu = ["Entry Level Authentication","Login","SignUp","Admin Login"]
     choice = st.sidebar.selectbox("Menu",menu)
 
-    if choice == "Home":
+    if choice == "Entry Level Authentication":
         st.subheader("No Beauty Shines Brighter Than A Healthy Heart")
         # import Image from pillow to open images
         from PIL import Image
         img = Image.open("streamlit.png")
-  
         # display image using streamlit
         # width is used to set the width of an image
         st.image(img, width=700)
     elif choice == "Login":
         st.subheader("Login Section")
         st.markdown("Enter Username And Password")
-
+        
         username = st.sidebar.text_input("User Name")
         password = st.sidebar.text_input("Password",type='password')
         if st.sidebar.checkbox("Login"):
@@ -137,7 +136,7 @@ def main():
                     submit = st.button('Submit')
                     if submit:
                         df = [age,sex,Chest_pain,Resting_blood_pressure,Cholestrol,Thalach,EIA,Oldpeak,Slope,CA,Thal]
-                        heart = pd.read_csv("data/dataset.csv")
+                        heart = pd.read_csv("dataset.csv")
                         X = heart.iloc[:,0:11].values
                         Y = heart.iloc[:,[11]].values
                         print(X.shape)
