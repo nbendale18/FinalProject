@@ -68,13 +68,14 @@ def main():
         # import Image from pillow to open images
         from PIL import Image
         img = Image.open("streamlit.png")
+  
         # display image using streamlit
         # width is used to set the width of an image
         st.image(img, width=700)
     elif choice == "Login":
         st.subheader("Login Section")
         st.markdown("Enter Username And Password")
-        
+
         username = st.sidebar.text_input("User Name")
         password = st.sidebar.text_input("Password",type='password')
         if st.sidebar.checkbox("Login"):
@@ -136,7 +137,7 @@ def main():
                     submit = st.button('Submit')
                     if submit:
                         df = [age,sex,Chest_pain,Resting_blood_pressure,Cholestrol,Thalach,EIA,Oldpeak,Slope,CA,Thal]
-                        heart = pd.read_csv("dataset.csv")
+                        heart = pd.read_csv("data/dataset.csv")
                         X = heart.iloc[:,0:11].values
                         Y = heart.iloc[:,[11]].values
                         print(X.shape)
@@ -186,7 +187,7 @@ def main():
                         elif  ((aa >= 10) and (aa <= 14)):
                             st.write('You have moderate anxiety.')
                         elif  ((aa >= 15) and (aa <= 19)):
-                            st.write('You have mild anxiety.')
+                            st.write('You have severe anxiety.')
                         else :
                             st.write('You have extremely severe anxiety. Consult a specialist.')
                         if dd < 9:
@@ -196,7 +197,7 @@ def main():
                         elif  ((dd >= 14) and (dd <= 20)):
                             st.write('You have moderate depression.')
                         elif  ((dd >= 21) and (dd <= 27)):
-                            st.write('You have mild depression.')
+                            st.write('You have severe depression.')
                         else :
                             st.write('You have extremely severe depression. Consult a specialist.')
     
@@ -236,7 +237,7 @@ def main():
         if st.sidebar.checkbox("Login"):
             if username == 'Admin' and password == '12345':
                 st.success("Logged In as {}".format(username))
-                task1 = st.selectbox("Tasks",["Add Doctor","Remove Doctor","View Doctor"])
+                task1 = st.selectbox("Tasks",["Add Doctor","Remove Doctor","View Doctor","View Data"])
                 if task1 == "Add Doctor":
                     st.subheader("Add Doctor")
                     DName=st.text_input("Enter the name : ")
@@ -258,6 +259,14 @@ def main():
                     doc_result = view_doctor()
                     clean_db = pd.DataFrame(doc_result,columns=["Name","Address","City"])
                     st.dataframe(clean_db)
+
+                if task1 == "View Data":
+                    heart = pd.read_csv("data/dataset.csv")
+                    df=pd.DataFrame(heart[:303],columns=['age','cp','trestbps','chol'])
+                    st.line_chart(df)
+                    st.set_option('deprecation.showPyplotGlobalUse', False)
+
+
 
             else:
                 st.warning("Incorrect Username/Password")
