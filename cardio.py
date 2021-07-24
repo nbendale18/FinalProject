@@ -260,7 +260,7 @@ def main():
                     st.dataframe(clean_db)
 
                 if task1 == "View Data":
-                    heart = pd.read_csv("data/dataset.csv")
+                    heart = pd.read_csv("dataset.csv")
                     df=pd.DataFrame(heart[:303],columns=['age','cp','trestbps','chol'])
                     st.line_chart(df)
                     st.set_option('deprecation.showPyplotGlobalUse', False)
