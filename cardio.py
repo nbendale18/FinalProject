@@ -68,14 +68,13 @@ def main():
         # import Image from pillow to open images
         from PIL import Image
         img = Image.open("streamlit.png")
-  
         # display image using streamlit
         # width is used to set the width of an image
         st.image(img, width=700)
     elif choice == "Login":
         st.subheader("Login Section")
         st.markdown("Enter Username And Password")
-
+        
         username = st.sidebar.text_input("User Name")
         password = st.sidebar.text_input("Password",type='password')
         if st.sidebar.checkbox("Login"):
@@ -137,7 +136,7 @@ def main():
                     submit = st.button('Submit')
                     if submit:
                         df = [age,sex,Chest_pain,Resting_blood_pressure,Cholestrol,Thalach,EIA,Oldpeak,Slope,CA,Thal]
-                        heart = pd.read_csv("data/dataset.csv")
+                        heart = pd.read_csv("dataset.csv")
                         X = heart.iloc[:,0:11].values
                         Y = heart.iloc[:,[11]].values
                         print(X.shape)
@@ -187,7 +186,7 @@ def main():
                         elif  ((aa >= 10) and (aa <= 14)):
                             st.write('You have moderate anxiety.')
                         elif  ((aa >= 15) and (aa <= 19)):
-                            st.write('You have severe anxiety.')
+                            st.write('You have mild anxiety.')
                         else :
                             st.write('You have extremely severe anxiety. Consult a specialist.')
                         if dd < 9:
@@ -197,7 +196,7 @@ def main():
                         elif  ((dd >= 14) and (dd <= 20)):
                             st.write('You have moderate depression.')
                         elif  ((dd >= 21) and (dd <= 27)):
-                            st.write('You have severe depression.')
+                            st.write('You have mild depression.')
                         else :
                             st.write('You have extremely severe depression. Consult a specialist.')
     
@@ -265,8 +264,6 @@ def main():
                     df=pd.DataFrame(heart[:303],columns=['age','cp','trestbps','chol'])
                     st.line_chart(df)
                     st.set_option('deprecation.showPyplotGlobalUse', False)
-
-
 
             else:
                 st.warning("Incorrect Username/Password")
